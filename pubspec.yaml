@@ -36,8 +36,10 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   shared_preferences: ^2.2.0
-  provider: ^6.0.1
-
+  convert: ^3.0.1
+  lint: ^2.0.0
+  http: ^1.1.0
+  auto_route: ^7.8.1
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -90,3 +92,6 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+  assets:
+    - lib/assets/mocked_data/movies.json
+    - lib/assets/mocked_data/genres.json

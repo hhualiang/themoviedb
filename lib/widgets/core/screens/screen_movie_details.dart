@@ -1,10 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '/widgets/custom_widgets.dart';
+import '../../../repository/movie_data_class.dart';
+import '../../../utils/enum_classes.dart';
+import '../../../utils/ui_constants.dart';
+import '../../../utils/ui_text.dart';
+import 'movie_screen_files/movie_genres/genres_section.dart';
+import 'movie_screen_files/movie_overview/container_overview.dart';
+import 'movie_screen_files/movie_screen_information.dart';
+import 'movie_screen_files/movie_screen_like_counter.dart';
+import 'movie_screen_files/movie_screen_movie_app_bar.dart';
+import 'movie_screen_files/movie_screen_title_text_style.dart';
 
 class ScreenMovieDetails extends StatefulWidget {
-  const ScreenMovieDetails({super.key});
+  const ScreenMovieDetails({
+    super.key,
+    required this.movie,
+  });
+
+  final MovieFile movie;
 
   @override
   State<ScreenMovieDetails> createState() => _ScreenMovieDetailsState();
@@ -14,20 +28,6 @@ class _ScreenMovieDetailsState extends State<ScreenMovieDetails> {
   int _counter = UiConstants.kCounterValueZero;
   final ButtonStyle buttonStyle = ElevatedButton.styleFrom(
     backgroundColor: Colors.white,
-  );
-  final movie = Movie(
-    title: UiText.movieFullTitle,
-    releaseDate: UiText.movieReleaseDate,
-    rating: UiText.movieRating,
-    largePhotoURL: UiText.networkImageWidePhotoLink,
-    smallPhotoURL: UiText.networkImageSmallPhotoLink,
-    genres: [
-      UiText.movieGenreAnimation,
-      UiText.movieGenreFamily,
-      UiText.movieGenreAdventure,
-      UiText.movieGenreFantasy,
-      UiText.movieGenreComedy
-    ],
   );
 
   @override
@@ -89,24 +89,26 @@ class _ScreenMovieDetailsState extends State<ScreenMovieDetails> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MovieAppBar(
-        movieTitle: movie.title,
+        movieTitle: widget.movie.originalTitle,
       ),
       body: Container(
         color: Colors.black,
         child: Column(
           children: [
             MovieBasicInfoDisplay(
-              movie: movie,
+              movie: widget.movie,
             ),
             GenresSection(
-              genres: movie.genres,
+              genresIds: widget.movie.genreIds,
             ),
-            const Column(
+            Column(
               children: [
-                TitleText(
+                const TitleText(
                   text: UiText.overviewLabel,
                 ),
-                ContainerOverview(),
+                ContainerOverview(
+                  overviewText: widget.movie.overviewText,
+                ),
               ],
             ),
             _verticalSpacer(

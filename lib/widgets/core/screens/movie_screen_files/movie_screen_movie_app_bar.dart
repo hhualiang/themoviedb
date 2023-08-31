@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '/widgets/custom_widgets.dart';
+import '../../upcoming_alert_dialog.dart';
+
 
 class MovieAppBar extends StatelessWidget implements PreferredSizeWidget {
   const MovieAppBar({
@@ -19,13 +20,13 @@ class MovieAppBar extends StatelessWidget implements PreferredSizeWidget {
       title: Text(
         movieTitle,
       ),
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.white,
       leading: IconButton(
         icon: const Icon(
           Icons.arrow_back,
         ),
         onPressed: () {
-          ShowUpcomingAlertDialog.showAlertDialog(context);
+          Navigator.pop(context);
         },
       ),
       actions: [

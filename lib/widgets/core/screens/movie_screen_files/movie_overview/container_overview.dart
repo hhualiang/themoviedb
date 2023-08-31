@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
-import '../../utils/ui_constants.dart';
-import '../../utils/ui_text.dart';
+import '../../../../../utils/ui_constants.dart';
 
 class ContainerOverview extends StatelessWidget {
   const ContainerOverview({
     super.key,
+    required this.overviewText,
   });
+
+  final String overviewText;
 
   @override
   Widget build(BuildContext context) {
@@ -19,10 +21,10 @@ class ContainerOverview extends StatelessWidget {
           width: UiConstants.overviewContainerBoxDecorWidth,
         ),
       ),
-      child: const Text(
-        UiText.movieOverviewText,
+      child: Text(
+        overviewText,
         textAlign: TextAlign.center,
-        style: TextStyle(
+        style: const TextStyle(
           color: Colors.white,
         ),
       ),

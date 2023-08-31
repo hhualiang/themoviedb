@@ -6,7 +6,7 @@ abstract class UiConstants {
   static const double genresTextTextFontSize = 16;
 
   //Photo constants
-  static const double photoPositionTop = 150;
+  static const double photoPositionBottom = 10;
   static const double photoPositionLeft = 20;
   static const double photoContainerWidth = 150;
   static const double photoContainerHeight = 220;
@@ -14,6 +14,7 @@ abstract class UiConstants {
   static const double photoPaddingLeft = 170;
   static const double photoPaddingTop = 30;
   static const double photoPaddingBottom = 40;
+  static const double photoContainerAspectRatio = 16/9;
 
   //Movie title
   static const double movieTitleSizedBoxWidth = 190;
@@ -26,8 +27,6 @@ abstract class UiConstants {
   static const double ratingRowSizedBoxWidth = 10;
 
   //Genres
-  static const double genresPaddingHorizontal = 5;
-  static const double genresPaddingVertical = 4;
   static const double genresSizedBoxListViewMovieGenres = 28;
 
   //Overview
@@ -47,6 +46,17 @@ abstract class UiConstants {
   static const int kCounterValueZero = 0;
   static const int kCounterIncrementValueOne = 1;
 
-  //tittle text constant
-  static const double tittleTextFontSize20 = 20;
+  //Title text constant
+  static const double titleTextFontSize = 20;
+
+  //Home Screen
+  static const double homeScreenContainerWidth = 180;
+  static const double homeScreenFavoriteIconSize = 30;
+  static const double homeScreenReleaseDateFontSize = 12;
+  static const double homeScreenMovieRowInformationPadding = 20;
+  static const double homeScreenSizedBoxSpacerHeight = 5;
+  static const double homeScreenMovieRowPadding = 5;
+  static const double homeScreenMovieTitleTextFontSize = 20;
+  //loading
+  static const int loadingDurationTime = 1;
 }

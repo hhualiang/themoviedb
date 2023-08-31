@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '/utils/ui_text.dart';
-import 'widgets/core/screens/screen_movie_details.dart';
+import 'utils/ui_text.dart';
+import 'widgets/core/screens/home_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,9 +12,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: UiText.appTitle,
-      home: ScreenMovieDetails(),
+      theme: ThemeData(
+        primarySwatch: Colors.grey,
+      ),
+      home: const HomePage(),
     );
   }
 }
