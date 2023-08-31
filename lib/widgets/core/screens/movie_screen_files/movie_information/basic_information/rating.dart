@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../utils/ui_constants.dart';
+import '../../../../../../utils/ui_constants.dart';
 
 class RatingDisplay extends StatelessWidget {
   const RatingDisplay({

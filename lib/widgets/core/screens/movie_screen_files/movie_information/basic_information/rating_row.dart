@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-import '../../../utils/ui_constants.dart';
+import '../../../../../../utils/ui_constants.dart';
 import 'rating.dart';
 
 class RatingRow extends StatelessWidget {

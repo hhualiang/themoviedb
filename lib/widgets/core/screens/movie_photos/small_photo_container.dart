@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '/widgets/custom_widgets.dart';
+import '../../../../../../utils/ui_constants.dart';
 
 class SmallPhotoContainer extends StatelessWidget {
   const SmallPhotoContainer({
@@ -25,7 +25,7 @@ class SmallPhotoContainer extends StatelessWidget {
         image: NetworkImage(
           url,
         ),
-        fit: BoxFit.fill,
+        fit: BoxFit.cover,
       ),
     );
   }

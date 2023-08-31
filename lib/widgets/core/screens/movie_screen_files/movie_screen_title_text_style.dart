@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../utils/ui_constants.dart';
+import '../../../../utils/ui_constants.dart';
 
 class TitleText extends StatelessWidget {
   const TitleText({
@@ -17,7 +17,7 @@ class TitleText extends StatelessWidget {
       style: const TextStyle(
         color: Colors.white,
         fontWeight: FontWeight.bold,
-        fontSize: UiConstants.tittleTextFontSize20,
+        fontSize: UiConstants.titleTextFontSize,
       ),
     );
   }
