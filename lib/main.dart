@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'utils/ui_text.dart';
-import 'widgets/core/screens/home_screen.dart';
+import 'src/core/util/ui_text.dart';
+import 'src/presentation/view/home_screen.dart';
 
 void main() {
   runApp(const MyApp());
