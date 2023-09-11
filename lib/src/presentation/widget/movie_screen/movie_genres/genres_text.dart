@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../src/core/util/ui_constants.dart';
+import '../../../../core/util/widget_keys.dart';
 
 class GenresText extends StatelessWidget {
+  static const double _horizontalPadding = 5;
+  static const double _borderRadius = 30;
+  static const double _containerBorderWidth = 3;
+  static const double _textFontSize = 16;
+
   const GenresText({
     super.key,
     required this.text,
@@ -13,21 +18,22 @@ class GenresText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      key: const Key(WidgetKey.genresText),
       padding: const EdgeInsets.symmetric(
-        horizontal: UiConstants.genresTextPaddingHorizontal,
+        horizontal: _horizontalPadding,
       ),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(UiConstants.genresTextBorderRadius),
+        borderRadius: BorderRadius.circular(_borderRadius),
         border: Border.all(
           color: Colors.grey,
-          width: UiConstants.genresTextContainerBorderWidth,
+          width: _containerBorderWidth,
         ),
       ),
       child: Text(
         text,
         style: const TextStyle(
           color: Colors.white,
-          fontSize: UiConstants.genresTextTextFontSize,
+          fontSize: _textFontSize,
         ),
       ),
     );

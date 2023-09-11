@@ -2,24 +2,27 @@ abstract class UiText {
   //App Title
   static const String appTitle = 'Movie Database';
 
-  //Show Alert Dialog text
-  static const String alertDialogOkLabel = 'OK';
-  static const String alertDialogUpcomingFeature = 'Upcoming feature';
-  static const String alertDialogUpcomingFeatureText =
-      'This is a  upcoming feature that does not work yet';
-
-  //Counter constant for shared preference
-  static const String sharedPreferencesKeyCounter = 'counter';
-
-  //Genres
-  static const String movieGenresLabel = 'Genres';
-
   //photoUrl
-  static const String movieURL= 'https://image.tmdb.org/t/p/w500/';
-  //Overview
-  static const String overviewLabel = 'Overview';
+  static const String movieURL = 'https://image.tmdb.org/t/p/w500/';
 
   //Home Screen
-  static const String homeScreenReleaseDate = 'Release date: ';
-  static const String homeScreenMovieTitle = 'Movie Title: ';
+  static const String homeScreenCategoryPopular = 'Popular';
+  static const String homeScreenCategoryNowPlaying = 'Now Playing';
+  static const String homeScreenCategoryTopRated = 'Top Rated';
+  static const String homeScreenCategoryUpcoming = 'Upcoming';
+
+  static const String homeScreenPlayNow = 'Play Now';
+
+  //API PROVIDER
+  static const String apiProviderUrl = 'http://api.themoviedb.org/3/movie/';
+  static const String apiProviderAPIKey = '?api_key=$apiProviderKey';
+  static const String apiProviderKey = '447e725503a582e83ecf9a7a50bc9729';
+  static const String apiProviderGenresLink =
+      'https://api.themoviedb.org/3/genre/movie/list?language=en&api_key=$apiProviderKey';
+  static const String apiProviderFailedToLoadPost = 'Failed to load post';
+
+  //App Route
+  static const String routeError = 'Error';
+
+//keys
 }

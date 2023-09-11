@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../../src/core/util/ui_constants.dart';
+import '../../../../../core/util/widget_keys.dart';
 
 class RatingDisplay extends StatelessWidget {
+  static const double circleAvatarRadius = 30;
+  static const double circleAvatarFontSize = 24;
+
   const RatingDisplay({
     super.key,
     required this.rating,
@@ -13,12 +16,13 @@ class RatingDisplay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CircleAvatar(
-      radius: UiConstants.ratingCircleAvatarRadius,
+      key: const Key(WidgetKey.ratingDisplay),
+      radius: circleAvatarRadius,
       backgroundColor: Colors.white70,
       child: Text(
         rating,
         style: const TextStyle(
-          fontSize: UiConstants.ratingCircleAvatarFontSize,
+          fontSize: circleAvatarFontSize,
           color: Colors.black,
         ),
       ),

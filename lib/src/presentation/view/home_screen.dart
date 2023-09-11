@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../data/repository/local_repository.dart';
+import '../../core/util/enum_classes.dart';
 import '../../domain/entity/movie.dart';
+import '../widget/drawer/app_drawer.dart';
 import '../widget/home_screen/home_screen_app_bar.dart';
-import '../widget/home_screen/home_screen_movie_list_view.dart';
+import 'movie_list_by_category.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -12,42 +13,56 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   late Future<List<Movie>> movieList;
+
+  late final PageController pageController;
+
+  late final TabController tabController;
+
+  void onPageChanged(int index) {
+    tabController.animateTo(index);
+  }
 
   @override
   void initState() {
     super.initState();
-    LocalRepository movieRepository = LocalRepository();
-    movieList = movieRepository.getMovies();
+    tabController = TabController(
+      length: Pages.values.length,
+      vsync: this,
+    );
+    pageController = PageController();
+  }
+
+  @override
+  void dispose() {
+    tabController.dispose();
+    pageController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const HomeScreenAppBar(),
+      appBar: HomeScreenAppBar(
+        pageController: pageController,
+        tabController: tabController,
+      ),
+      drawer: const AppDrawer(),
       body: Container(
         width: MediaQuery.of(context).size.width,
         color: Colors.black,
-        child: FutureBuilder<List<Movie>>(
-          future: movieList,
-          builder: (
-            BuildContext context,
-            AsyncSnapshot<List<Movie>> snapshot,
-          ) {
-            if (snapshot.hasData) {
-              return MovieRowListView(
-                movieList: snapshot.data ?? <Movie>[],
-              );
-            } else if (snapshot.hasError) {
-              return Text(
-                snapshot.error.toString(),
-              );
-            } else {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            }
+        child: PageView(
+          physics: const NeverScrollableScrollPhysics(),
+          controller: pageController,
+          children: <Widget>[
+            for (Pages pages in Pages.values)
+              MoviesByCategory(
+                category: pages.pageName.toLowerCase().replaceAll(' ', '_'),
+              ),
+          ],
+          onPageChanged: (int page) {
+            tabController.animateTo(page);
           },
         ),
       ),

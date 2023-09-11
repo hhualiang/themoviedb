@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 
-import '../../core/util/ui_text.dart';
-
 abstract class ShowUpcomingAlertDialog {
+  static const String _okLabel = 'OK';
+  static const String _upcomingFeature = 'Upcoming feature';
+  static const String _upcomingFeatureText =
+      'This is a  upcoming feature that does not work yet';
+
   static void showAlertDialog(BuildContext context) {
     // set up the button
     Widget okButton = TextButton(
       child: const Text(
-        UiText.alertDialogOkLabel,
+        _okLabel,
       ),
       onPressed: () {
         Navigator.of(context).pop();
@@ -17,10 +20,10 @@ abstract class ShowUpcomingAlertDialog {
     // set up the AlertDialog
     AlertDialog alert = AlertDialog(
       title: const Text(
-        UiText.alertDialogUpcomingFeature,
+        _upcomingFeature,
       ),
       content: const Text(
-        UiText.alertDialogUpcomingFeatureText,
+        _upcomingFeatureText,
       ),
       actions: <Widget>[
         okButton,

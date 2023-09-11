@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../../../src/core/util/ui_constants.dart';
-import '../../../../src/core/util/ui_text.dart';
+import '../../../core/util/widget_keys.dart';
 
 class HomeScreenMovieTitle extends StatelessWidget {
+  static const double _fontSize = 16;
+
   const HomeScreenMovieTitle({
     super.key,
     required this.title,
@@ -13,13 +14,14 @@ class HomeScreenMovieTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: UiConstants.homeScreenContainerWidth,
+    return Center(
+      key: const Key(WidgetKey.homeScreenMovieTitle),
       child: Text(
-        '${UiText.homeScreenMovieTitle} $title',
+        title,
+        textAlign: TextAlign.center,
         style: const TextStyle(
           color: Colors.white,
-          fontSize: UiConstants.homeScreenMovieTitleTextFontSize,
+          fontSize: _fontSize,
         ),
       ),
     );
