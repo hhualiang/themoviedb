@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../domain/entity/movie.dart';
 import '../../core/util/enum_classes.dart';
-import '../../core/util/ui_constants.dart';
-import '../../core/util/ui_text.dart';
+import '../../domain/entity/movie.dart';
+import '../bloc/movie_genres_controller.dart';
 import '../widget/movie_screen/movie_genres/genres_section.dart';
 import '../widget/movie_screen/movie_overview/container_overview.dart';
 import '../widget/movie_screen/movie_screen_information.dart';
@@ -25,7 +25,13 @@ class ScreenMovieDetails extends StatefulWidget {
 }
 
 class _ScreenMovieDetailsState extends State<ScreenMovieDetails> {
-  int _counter = UiConstants.kCounterValueZero;
+  static const double _verticalSpacerValue = 15;
+  static const double _horizontalSpacerValue = 30;
+  static const int _initialCounterValue = 0;
+  static const int _incrementValue = 1;
+  static const String _sharedPreferencesKeyCounter = 'counter';
+  static const String _overviewLabel = 'Overview';
+  int _counter = _initialCounterValue;
   final ButtonStyle buttonStyle = ElevatedButton.styleFrom(
     backgroundColor: Colors.white,
   );
@@ -51,18 +57,18 @@ class _ScreenMovieDetailsState extends State<ScreenMovieDetails> {
         switch (action) {
           case CounterAction.load:
             _counter = (sharedPreferenceInstance.getInt(
-                  UiText.sharedPreferencesKeyCounter,
+                  _sharedPreferencesKeyCounter,
                 ) ??
-                UiConstants.kCounterValueZero);
+                _initialCounterValue);
             break;
           case CounterAction.increment:
             _counter = (sharedPreferenceInstance.getInt(
-                      UiText.sharedPreferencesKeyCounter,
+                      _sharedPreferencesKeyCounter,
                     ) ??
-                    UiConstants.kCounterValueZero) +
-                UiConstants.kCounterIncrementValueOne;
+                    _initialCounterValue) +
+                _incrementValue;
             sharedPreferenceInstance.setInt(
-              UiText.sharedPreferencesKeyCounter,
+              _sharedPreferencesKeyCounter,
               _counter,
             );
             break;
@@ -87,6 +93,12 @@ class _ScreenMovieDetailsState extends State<ScreenMovieDetails> {
 
   @override
   Widget build(BuildContext context) {
+    final MovieGenresController movieGenreController =
+        Provider.of<MovieGenresController>(
+      context,
+      listen: false,
+    );
+    movieGenreController.initialize();
     return Scaffold(
       appBar: MovieAppBar(
         movieTitle: widget.movie.originalTitle,
@@ -100,11 +112,12 @@ class _ScreenMovieDetailsState extends State<ScreenMovieDetails> {
             ),
             GenresSection(
               genresIds: widget.movie.genreIds,
+              genresStream: movieGenreController.genresStream,
             ),
             Column(
               children: <Widget>[
                 const TitleText(
-                  text: UiText.overviewLabel,
+                  text: _overviewLabel,
                 ),
                 ContainerOverview(
                   overviewText: widget.movie.overviewText,
@@ -112,7 +125,7 @@ class _ScreenMovieDetailsState extends State<ScreenMovieDetails> {
               ],
             ),
             _verticalSpacer(
-              UiConstants.kSpacerValueFifteen,
+              _verticalSpacerValue,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
@@ -121,7 +134,7 @@ class _ScreenMovieDetailsState extends State<ScreenMovieDetails> {
                   counter: _counter,
                 ),
                 _horizontalSpacer(
-                  UiConstants.likeButtonSizedBoxWidth,
+                  _horizontalSpacerValue,
                 ),
                 ElevatedButton(
                   onPressed: () {
@@ -143,7 +156,7 @@ class _ScreenMovieDetailsState extends State<ScreenMovieDetails> {
                   ),
                 ),
                 _horizontalSpacer(
-                  UiConstants.kSpacerValueFifteen,
+                  _horizontalSpacerValue,
                 ),
               ],
             ),

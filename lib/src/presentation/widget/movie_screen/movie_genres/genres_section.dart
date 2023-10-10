@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
 
-import '../../../../data/repository/local_repository.dart';
-import '../../../../../src/core/util/ui_constants.dart';
-import '../../../../../src/core/util/ui_text.dart';
+import '../../../../core/util/enum_classes.dart';
+import '../../../../core/util/genres_converter.dart';
+import '../../../../core/util/widget_keys.dart';
+import '../../../../domain/entity/genre_state.dart';
 import '../movie_screen_title_text_style.dart';
 import 'genres_text.dart';
 
 class GenresSection extends StatefulWidget {
   const GenresSection({
     super.key,
+    required this.genresStream,
     required this.genresIds,
   });
+
+  final Stream<GenresState> genresStream;
 
   final List<int> genresIds;
 
@@ -19,58 +23,75 @@ class GenresSection extends StatefulWidget {
 }
 
 class _GenresSectionState extends State<GenresSection> {
-  late Future<List<String>> genres;
+  static const double _sizedBoxHeight = 28;
+  static const String _movieGenresLabel = 'Genres';
 
   @override
   void initState() {
     super.initState();
-    LocalRepository movieRepository = LocalRepository();
-    genres = movieRepository.getGenresByIds(widget.genresIds);
   }
+
+  late List<String> genres;
 
   @override
   Widget build(BuildContext context) {
     return Center(
+      key: const Key(WidgetKey.movieDetailsGenresSection),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           const TitleText(
-            text: UiText.movieGenresLabel,
+            text: _movieGenresLabel,
           ),
           SizedBox(
-            height: UiConstants.genresSizedBoxListViewMovieGenres,
-            child: FutureBuilder<List<String>>(
-              future: genres,
+            height: _sizedBoxHeight,
+            child: StreamBuilder<GenresState>(
+              stream: widget.genresStream,
               builder: (
                 BuildContext context,
-                AsyncSnapshot<List<String>> snapshot,
+                AsyncSnapshot<GenresState> snapshot,
               ) {
-                if (snapshot.hasData) {
-                  return ListView.builder(
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    itemCount: snapshot.data!.length,
-                    itemBuilder: (
-                      BuildContext context,
-                      int index,
-                    ) {
-                      return GenresText(
-                        text: snapshot.data![index],
-                      );
-                    },
-                  );
-                } else if (snapshot.hasError) {
-                  return Text(
-                    snapshot.error.toString(),
-                  );
-                } else {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
+                switch (snapshot.data?.state) {
+                  case BaseState.success:
+                    genres = GenresConverter().getGenresByIds(
+                      widget.genresIds,
+                      snapshot.data!.genreList,
+                    );
+                    return ListView.builder(
+                      key: const Key(WidgetKey.genresSectionListView),
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      itemCount: genres.length,
+                      itemBuilder: (
+                        BuildContext context,
+                        int index,
+                      ) {
+                        return GenresText(
+                          text: genres[index],
+                        );
+                      },
+                    );
+                  case BaseState.empty:
+                    return const SizedBox.shrink();
+                  case BaseState.loading:
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  case BaseState.failure:
+                    return Center(
+                      child: Text(
+                        snapshot.data!.error!,
+                        style: const TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                    );
+                  default:
+                    return const SizedBox();
                 }
               },
             ),
-          ),
+          )
         ],
       ),
     );

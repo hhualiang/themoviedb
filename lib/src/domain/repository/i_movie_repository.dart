@@ -1,10 +1,9 @@
-import '../entity/movie.dart';
-import '../entity/movie_genre.dart';
+import '../../core/util/data_state.dart';
+import '../../data/model/genres_model.dart';
+import '../../data/model/movie_model.dart';
 
 abstract class IMovieRepository {
-  Future<List<Movie>> getMovies();
+  Future<DataState<MovieModel>> fetchMoviesFromAPI(String category);
 
-  Future<List<MovieGenre>> getGenres();
-
-  Future<List<String>> getGenresByIds(List<int> ids);
+  Future<DataState<GenreModel>> fetchGenresFromAPI();
 }

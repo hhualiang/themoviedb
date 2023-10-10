@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../src/core/util/ui_constants.dart';
+import '../../../core/util/widget_keys.dart';
 
 class TitleText extends StatelessWidget {
   const TitleText({
@@ -14,10 +15,11 @@ class TitleText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
+      key: const Key(WidgetKey.titleTextStyle),
       style: const TextStyle(
         color: Colors.white,
         fontWeight: FontWeight.bold,
-        fontSize: UiConstants.titleTextFontSize,
+        fontSize: UiConstants.normalFontSize,
       ),
     );
   }

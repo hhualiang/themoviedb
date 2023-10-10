@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../src/core/util/ui_constants.dart';
+import '../../../../core/util/widget_keys.dart';
 
 class ContainerOverview extends StatelessWidget {
+  static const double containerWidthUsage = 0.9;
+  static const double boxDecorWidth = 5;
+
   const ContainerOverview({
     super.key,
     required this.overviewText,
@@ -13,12 +16,12 @@ class ContainerOverview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width *
-          UiConstants.overviewContainerWidthUsage,
+      key: const Key(WidgetKey.overviewText),
+      width: MediaQuery.of(context).size.width * containerWidthUsage,
       decoration: BoxDecoration(
         border: Border.all(
           color: Colors.grey,
-          width: UiConstants.overviewContainerBoxDecorWidth,
+          width: boxDecorWidth,
         ),
       ),
       child: Text(

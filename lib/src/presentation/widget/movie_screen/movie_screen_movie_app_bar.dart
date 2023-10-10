@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/util/widget_keys.dart';
 import '../upcoming_alert_dialog.dart';
 
 class MovieAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -16,10 +17,11 @@ class MovieAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      key: const Key(WidgetKey.movieDetailsAppBar),
       title: Text(
         movieTitle,
       ),
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.black,
       leading: IconButton(
         icon: const Icon(
           Icons.arrow_back,

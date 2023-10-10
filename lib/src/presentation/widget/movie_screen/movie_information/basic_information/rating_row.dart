@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 
-import '../../../../../../src/core/util/ui_constants.dart';
+import '../../../../../core/util/widget_keys.dart';
 import 'rating.dart';
 
 class RatingRow extends StatelessWidget {
+  static const double sizedBoxWidth = 10;
+
   const RatingRow({
     super.key,
     required this.rating,
@@ -14,13 +16,14 @@ class RatingRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      key: const Key(WidgetKey.movieDetailsRatingRow),
       mainAxisAlignment: MainAxisAlignment.end,
-      children: <Widget> [
+      children: <Widget>[
         RatingDisplay(
           rating: rating,
         ),
         const SizedBox(
-          width: UiConstants.ratingRowSizedBoxWidth,
+          width: sizedBoxWidth,
         ),
       ],
     );

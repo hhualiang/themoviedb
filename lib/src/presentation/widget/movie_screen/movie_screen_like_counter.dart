@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 
 import '../../../../src/core/util/ui_constants.dart';
+import '../../../core/util/widget_keys.dart';
 
 class ContainerCounter extends StatelessWidget {
+  static const double _containerHeightWidth = 40;
+  static const double _containerBorderRadiusC = 20;
+
+
   const ContainerCounter({
     super.key,
     required int counter,
@@ -13,11 +18,11 @@ class ContainerCounter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: UiConstants.likeButtonContainerHeightWidth,
-      width: UiConstants.likeButtonContainerHeightWidth,
+      key: const Key(WidgetKey.movieDetailsCounter),
+      height: _containerHeightWidth,
+      width: _containerHeightWidth,
       decoration: BoxDecoration(
-        borderRadius:
-            BorderRadius.circular(UiConstants.likeButtonContainerBorderRadiusC),
+        borderRadius: BorderRadius.circular(_containerBorderRadiusC),
         border: Border.all(
           color: Colors.white,
         ),
@@ -27,7 +32,7 @@ class ContainerCounter extends StatelessWidget {
           '$_counter',
           style: const TextStyle(
             color: Colors.white,
-            fontSize: UiConstants.likeButtonContainerFontSize,
+            fontSize: UiConstants.normalFontSize,
           ),
         ),
       ),

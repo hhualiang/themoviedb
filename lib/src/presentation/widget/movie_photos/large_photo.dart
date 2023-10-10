@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../../../src/core/util/ui_constants.dart';
+import '../../../core/util/widget_keys.dart';
 
 class LargePhoto extends StatelessWidget {
+  static const double _aspectRatio = 16 / 9;
+
   const LargePhoto({
     super.key,
     required this.url,
@@ -13,8 +15,9 @@ class LargePhoto extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AspectRatio(
-      aspectRatio: UiConstants.photoContainerAspectRatio,
+      aspectRatio: _aspectRatio,
       child: Image(
+        key: const Key(WidgetKey.backdropPhoto),
         image: NetworkImage(
           url,
         ),

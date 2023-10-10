@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/util/widget_keys.dart';
 import '../../../domain/entity/movie.dart';
-import '../../../../src/core/util/ui_constants.dart';
 import '../movie_photos/large_photo.dart';
 import '../movie_photos/small_photo_container.dart';
 import 'movie_information/basic_information/movie_title.dart';
@@ -9,6 +9,12 @@ import 'movie_information/basic_information/rating_row.dart';
 import 'movie_information/basic_information/release_date.dart';
 
 class MovieBasicInfoDisplay extends StatelessWidget {
+  static const double _positionBottom = 10;
+  static const double _positionLeft = 20;
+  static const double _paddingLeft = 170;
+  static const double _paddingTop = 30;
+  static const double _paddingBottom = 40;
+
   const MovieBasicInfoDisplay({
     super.key,
     required this.movie,
@@ -19,6 +25,7 @@ class MovieBasicInfoDisplay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(
+      key: const Key(WidgetKey.movieBasicInfoDisplay),
       children: <Widget>[
         Column(
           children: <Widget>[
@@ -27,9 +34,9 @@ class MovieBasicInfoDisplay extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.only(
-                left: UiConstants.photoPaddingLeft,
-                bottom: UiConstants.photoPaddingBottom,
-                top: UiConstants.photoPaddingTop,
+                left: _paddingLeft,
+                bottom: _paddingBottom,
+                top: _paddingTop,
               ),
               child: Column(
                 children: <Widget>[
@@ -48,8 +55,8 @@ class MovieBasicInfoDisplay extends StatelessWidget {
           ],
         ),
         Positioned(
-          bottom: UiConstants.photoPositionBottom,
-          left: UiConstants.photoPositionLeft,
+          bottom: _positionBottom,
+          left: _positionLeft,
           child: SmallPhotoContainer(
             url: movie.posterPath,
           ),
