@@ -4,6 +4,10 @@ import '../../../core/util/widget_keys.dart';
 
 class LargePhoto extends StatelessWidget {
   static const double _aspectRatio = 16 / 9;
+  static const double _errorImageHeight = 100;
+  static const double _errorImageWidth = 70;
+  static const String _errorImagePath = 'lib/assets/no_image_found.png';
+  static const String _errorImageText = 'Could not load image...';
 
   const LargePhoto({
     super.key,
@@ -18,6 +22,23 @@ class LargePhoto extends StatelessWidget {
       aspectRatio: _aspectRatio,
       child: Image(
         key: const Key(WidgetKey.backdropPhoto),
+        errorBuilder: (
+          BuildContext context,
+          Object object,
+          StackTrace? stackTracer,
+        ) =>
+            const Column(
+          children: <Widget>[
+            SizedBox(
+              width: _errorImageWidth,
+              height: _errorImageHeight,
+              child: Image(
+                image: AssetImage(_errorImagePath),
+              ),
+            ),
+            Text(_errorImageText)
+          ],
+        ),
         image: NetworkImage(
           url,
         ),

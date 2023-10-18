@@ -1,7 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:themovietb/src/core/util/data_state.dart';
-import 'package:themovietb/src/data/model/genres_model.dart';
 import 'package:themovietb/src/domain/entity/genre_state.dart';
 import 'package:themovietb/src/domain/entity/movie_genre.dart';
 import 'package:themovietb/src/domain/usecase/usecase_impl/get_genres_usecase_impl.dart';
@@ -24,8 +23,8 @@ void main() {
   test(
       'The stream in genrebloc should return first a GenresState.loading and then a GenresState.success when the fetch was successful',
       () {
-    when(() => getGenresUseCase.getGenresModel())
-        .thenAnswer((_) async => DataSuccess(GenreModel(result: mockResult)));
+    when(() => getGenresUseCase.getGenreList())
+        .thenAnswer((_) async => DataSuccess(mockResult));
 
     Stream<GenresState> result = genreBloc.genresStream;
     final expected = [
@@ -38,7 +37,7 @@ void main() {
   test(
       'The stream in genrebloc should retunr first a GenresState.laoding and then a GenresState.error when the fetch was unsuccessful',
       () {
-    when(() => getGenresUseCase.getGenresModel())
+    when(() => getGenresUseCase.getGenreList())
         .thenAnswer((_) async => DataFailed('error'));
 
     Stream<GenresState> result = genreBloc.genresStream;

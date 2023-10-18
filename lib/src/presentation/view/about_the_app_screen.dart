@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../core/util/ui_text.dart';
+import '../../core/util/ui_string.dart';
 import '../widget/drawer/app_drawer_format.dart';
 
 class AboutTheApp extends StatelessWidget {
@@ -20,7 +20,7 @@ class AboutTheApp extends StatelessWidget {
         backgroundColor: Colors.white,
         iconTheme: const IconThemeData(color: Colors.black),
         title: const Text(
-          UiText.appTitle,
+          UiString.appTitle,
           style: TextStyle(
             color: Colors.black,
           ),

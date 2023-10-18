@@ -1,6 +1,6 @@
 import '../../../core/util/data_state.dart';
-import '../../../data/model/movie_model.dart';
+import '../../entity/movie.dart';
 
 abstract class IGetMoviesUseCase {
-  Future<DataState<MovieModel>> getMovieModel(String category);
+  Future<DataState<List<Movie>>> getMovieList(String category);
 }

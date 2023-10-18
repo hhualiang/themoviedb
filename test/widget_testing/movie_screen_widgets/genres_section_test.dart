@@ -41,7 +41,9 @@ void main() {
       );
 
       expect(
-          find.byKey(const Key('movieDetailsGenresSection')), findsOneWidget,);
+        find.byKey(const Key('movieDetailsGenresSection')),
+        findsOneWidget,
+      );
       await tester.pumpAndSettle();
       expect(find.byKey(const Key('genresSectionListView')), findsOneWidget);
     },

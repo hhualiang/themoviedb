@@ -1,4 +1,4 @@
-abstract class UiText {
+abstract class UiString {
   //App Title
   static const String appTitle = 'Movie Database';
 
@@ -24,5 +24,7 @@ abstract class UiText {
   //App Route
   static const String routeError = 'Error';
 
-//keys
+  //error image
+  static const String errorImagePath = 'lib/assets/no_image_found.png';
+  static const String errorImageText = 'Could not load image...';
 }

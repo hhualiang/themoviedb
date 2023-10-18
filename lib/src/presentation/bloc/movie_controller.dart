@@ -3,7 +3,7 @@ import 'dart:async';
 import '../../core/bloc/i_movie_controller.dart';
 import '../../core/util/data_state.dart';
 import '../../core/util/enum_classes.dart';
-import '../../data/model/movie_model.dart';
+import '../../domain/entity/movie.dart';
 import '../../domain/entity/movie_state.dart';
 import '../../domain/usecase/usecase_impl/get_movies_usecase_impl.dart';
 
@@ -12,7 +12,9 @@ class MovieController extends IMovieController {
       StreamController<MovieState>.broadcast();
   final GetMoviesUseCase getMoviesUseCase;
 
-  MovieController({required this.getMoviesUseCase});
+  MovieController({
+    required this.getMoviesUseCase,
+  });
 
   @override
   void dispose() {
@@ -24,13 +26,13 @@ class MovieController extends IMovieController {
     _moviesController.sink.add(
       MovieState.loading(),
     );
-    DataState<MovieModel> movieState =
-        await getMoviesUseCase.getMovieModel(category);
+    DataState<List<Movie>> movieState =
+        await getMoviesUseCase.getMovieList(category);
     if (movieState.state == BaseState.success) {
       _moviesController.sink.add(
         movieState.data != null
             ? MovieState.success(
-                movieList: movieState.data!.result,
+                movieList: movieState.data!,
               )
             : MovieState.empty(),
       );

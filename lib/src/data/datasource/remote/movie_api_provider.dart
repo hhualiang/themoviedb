@@ -5,7 +5,7 @@ import 'dart:io';
 import 'package:http/http.dart';
 
 import '../../../core/util/data_state.dart';
-import '../../../core/util/ui_text.dart';
+import '../../../core/util/ui_string.dart';
 
 class MovieApiProvider {
   Client client;
@@ -14,11 +14,13 @@ class MovieApiProvider {
     required this.client,
   });
 
-  Future<DataState<Map<String, dynamic>>> fetchMovieList(String category) async {
+  Future<DataState<Map<String, dynamic>>> fetchMovieList(
+    String category,
+  ) async {
     try {
       final Response response = await client.get(
         Uri.parse(
-          "${UiText.apiProviderUrl}$category${UiText.apiProviderAPIKey}",
+          "${UiString.apiProviderUrl}$category${UiString.apiProviderAPIKey}",
         ),
       );
       if (response.statusCode == HttpStatus.ok) {
@@ -26,7 +28,9 @@ class MovieApiProvider {
           json.decode(response.body),
         );
       } else {
-        return DataFailed<Map<String, dynamic>>(UiText.apiProviderFailedToLoadPost);
+        return DataFailed<Map<String, dynamic>>(
+          UiString.apiProviderFailedToLoadPost,
+        );
       }
     } catch (e) {
       return DataFailed<Map<String, dynamic>>(
@@ -39,7 +43,7 @@ class MovieApiProvider {
     try {
       final Response response = await client.get(
         Uri.parse(
-          UiText.apiProviderGenresLink,
+          UiString.apiProviderGenresLink,
         ),
       );
       if (response.statusCode == HttpStatus.ok) {
@@ -47,7 +51,9 @@ class MovieApiProvider {
           response.body,
         );
       } else {
-        return DataFailed<Map<String, dynamic>>(UiText.apiProviderFailedToLoadPost);
+        return DataFailed<Map<String, dynamic>>(
+          UiString.apiProviderFailedToLoadPost,
+        );
       }
     } catch (e) {
       return DataFailed<Map<String, dynamic>>(

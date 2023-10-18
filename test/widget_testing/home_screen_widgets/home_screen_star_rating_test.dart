@@ -7,11 +7,13 @@ void main() {
       'Verify that HomeScreenMovieRating widgets displays the correct amount of full stars, half stars, and empty stars depending on rating',
       (WidgetTester tester) async {
     const num rating = 6.7;
-    await tester.pumpWidget(const MaterialApp(
-      home: HomeScreenMovieRating(
-        rating: rating,
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: HomeScreenMovieRating(
+          rating: rating,
+        ),
       ),
-    ),);
+    );
 
     expect(find.byIcon(Icons.star), findsNWidgets(3));
     expect(find.byIcon(Icons.star_half), findsOneWidget);

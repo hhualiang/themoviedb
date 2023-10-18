@@ -3,8 +3,8 @@ import 'dart:async';
 import '../../core/bloc/i_movie_genres_controller.dart';
 import '../../core/util/data_state.dart';
 import '../../core/util/enum_classes.dart';
-import '../../data/model/genres_model.dart';
 import '../../domain/entity/genre_state.dart';
+import '../../domain/entity/movie_genre.dart';
 import '../../domain/usecase/usecase_impl/get_genres_usecase_impl.dart';
 
 class MovieGenresController extends IMovieGenreController {
@@ -24,12 +24,13 @@ class MovieGenresController extends IMovieGenreController {
     _genresController.sink.add(
       GenresState.loading(),
     );
-    DataState<GenreModel> genresState = await getGenresUseCase.getGenresModel();
+    DataState<List<MovieGenre>> genresState =
+        await getGenresUseCase.getGenreList();
     if (genresState.state == BaseState.success) {
       _genresController.sink.add(
         genresState.data != null
             ? GenresState.success(
-                genreList: genresState.data!.result,
+                genreList: genresState.data!,
               )
             : GenresState.empty(),
       );

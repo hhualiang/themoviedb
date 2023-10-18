@@ -21,6 +21,7 @@ void main() {
       hasVideo: false,
       movieRating: 10,
       voteCount: 200,
+      category: [],
     ),
     Movie(
       adult: false,
@@ -37,6 +38,7 @@ void main() {
       hasVideo: false,
       movieRating: 10,
       voteCount: 200,
+      category: [],
     ),
   ];
 
