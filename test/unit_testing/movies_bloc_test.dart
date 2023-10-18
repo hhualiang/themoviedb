@@ -1,7 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:themovietb/src/core/util/data_state.dart';
-import 'package:themovietb/src/data/model/movie_model.dart';
 import 'package:themovietb/src/domain/entity/movie_state.dart';
 import 'package:themovietb/src/domain/usecase/usecase_impl/get_movies_usecase_impl.dart';
 import 'package:themovietb/src/presentation/bloc/movie_controller.dart';
@@ -19,10 +18,8 @@ void main() {
   test(
       'when trying to get the movies my bloc should return a stream of movies after fetching them through my useCase from the repository',
       () {
-    when(() => mockUseCase.getMovieModel(any())).thenAnswer(
-      (_) async => DataSuccess(
-        MovieModel(page: 3, totalResults: 3, totalPages: 3, result: []),
-      ),
+    when(() => mockUseCase.getMovieList(any())).thenAnswer(
+      (_) async => DataSuccess([]),
     );
 
     Stream<MovieState> result = moviesBloc.moviesStream;
@@ -35,7 +32,7 @@ void main() {
   test(
       'when trying to get the movies my bloc should return a stream of movies after fetching them through my useCase from the repository',
       () {
-    when(() => mockUseCase.getMovieModel(any()))
+    when(() => mockUseCase.getMovieList(any()))
         .thenAnswer((_) async => DataFailed('error'));
 
     Stream<MovieState> result = moviesBloc.moviesStream;

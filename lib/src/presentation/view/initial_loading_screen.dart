@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -5,7 +7,7 @@ import 'package:provider/provider.dart';
 import '../../config/route/route_names.dart';
 import '../../core/util/enum_classes.dart';
 import '../../core/util/ui_constants.dart';
-import '../../core/util/ui_text.dart';
+import '../../core/util/ui_string.dart';
 import '../../domain/entity/movie_state.dart';
 import '../bloc/movie_controller.dart';
 
@@ -21,6 +23,7 @@ class _InitialLoadingScreenState extends State<InitialLoadingScreen> {
   static const double _appNameFontSize = 30;
 
   late final MovieController movieController;
+  late final StreamSubscription<dynamic> movieSub;
 
   @override
   void initState() {
@@ -30,17 +33,17 @@ class _InitialLoadingScreenState extends State<InitialLoadingScreen> {
       listen: false,
     );
     movieController.initialize();
-    movieController.moviesStream.listen((MovieState event) {
+
+    movieSub = movieController.moviesStream.listen((MovieState event) {
       if (event.state == BaseState.success || event.state == BaseState.empty) {
-        Navigator.of(context).pushNamed(
+        Navigator.of(context).pushReplacementNamed(
           RouteNames.home,
         );
       }
     });
+
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
   }
-
-  void waitForFetchMovies() {}
 
   @override
   void dispose() {
@@ -48,7 +51,7 @@ class _InitialLoadingScreenState extends State<InitialLoadingScreen> {
       SystemUiMode.manual,
       overlays: SystemUiOverlay.values,
     );
-
+    movieSub.cancel();
     super.dispose();
   }
 
@@ -97,7 +100,7 @@ class _InitialLoadingScreenState extends State<InitialLoadingScreen> {
                         height: UiConstants.normalVerticalSpacerHeight,
                       ),
                       Text(
-                        UiText.appTitle,
+                        UiString.appTitle,
                         style: TextStyle(
                           fontSize: _appNameFontSize,
                           color: Colors.black,

@@ -7,7 +7,10 @@ void main() {
       (WidgetTester tester) async {
     const int counter = 345;
     await tester.pumpWidget(
-        const MaterialApp(home: ContainerCounter(counter: counter),),);
+      const MaterialApp(
+        home: ContainerCounter(counter: counter),
+      ),
+    );
 
     expect(find.byKey(const Key('movieDetailsCounter')), findsOneWidget);
     expect(find.text(counter.toString()), findsOneWidget);

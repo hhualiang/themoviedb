@@ -1,4 +1,4 @@
-import 'ui_text.dart';
+import 'ui_string.dart';
 
 enum CounterAction {
   load,
@@ -15,19 +15,19 @@ enum BaseState {
 enum Pages {
   popular(
     0,
-    UiText.homeScreenCategoryPopular,
+    UiString.homeScreenCategoryPopular,
   ),
   nowPlaying(
     1,
-    UiText.homeScreenCategoryNowPlaying,
+    UiString.homeScreenCategoryNowPlaying,
   ),
   topRated(
     2,
-    UiText.homeScreenCategoryTopRated,
+    UiString.homeScreenCategoryTopRated,
   ),
   upcoming(
     3,
-    UiText.homeScreenCategoryUpcoming,
+    UiString.homeScreenCategoryUpcoming,
   );
 
   const Pages(

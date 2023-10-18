@@ -7,7 +7,6 @@ class ContainerCounter extends StatelessWidget {
   static const double _containerHeightWidth = 40;
   static const double _containerBorderRadiusC = 20;
 
-
   const ContainerCounter({
     super.key,
     required int counter,

@@ -35,7 +35,10 @@ class MovieRepository extends IMovieRepository {
         await moviesApiProvider.fetchMovieList(category);
     if (result.state == BaseState.success) {
       return DataSuccess<MovieModel>(
-        MovieModel.fromJson(result.data),
+        MovieModel.fromJson(
+          result.data,
+          category,
+        ),
       );
     } else {
       return DataFailed<MovieModel>(result.error!);

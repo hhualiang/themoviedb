@@ -26,11 +26,6 @@ class _GenresSectionState extends State<GenresSection> {
   static const double _sizedBoxHeight = 28;
   static const String _movieGenresLabel = 'Genres';
 
-  @override
-  void initState() {
-    super.initState();
-  }
-
   late List<String> genres;
 
   @override
@@ -53,7 +48,7 @@ class _GenresSectionState extends State<GenresSection> {
               ) {
                 switch (snapshot.data?.state) {
                   case BaseState.success:
-                    genres = GenresConverter().getGenresByIds(
+                    List<String> genres = GenresConverter().getGenresByIds(
                       widget.genresIds,
                       snapshot.data!.genreList,
                     );

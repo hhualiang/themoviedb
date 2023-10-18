@@ -1,6 +1,6 @@
 import '../../../core/util/data_state.dart';
-import '../../../data/model/genres_model.dart';
+import '../../entity/movie_genre.dart';
 
 abstract class IGetGenresUseCase {
-  Future<DataState<GenreModel>> getGenresModel();
+  Future<DataState<List<MovieGenre>>> getGenreList();
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../src/core/util/ui_text.dart';
+import '../../../../src/core/util/ui_string.dart';
 import '../upcoming_alert_dialog.dart';
 
 class HomeScreenAppBar extends StatefulWidget implements PreferredSizeWidget {
@@ -35,7 +35,7 @@ class _HomeScreenAppBarState extends State<HomeScreenAppBar>
       backgroundColor: Colors.white,
       iconTheme: const IconThemeData(color: Colors.black),
       title: const Text(
-        UiText.appTitle,
+        UiString.appTitle,
         style: TextStyle(
           color: Colors.black,
         ),
@@ -65,22 +65,22 @@ class _HomeScreenAppBarState extends State<HomeScreenAppBar>
         controller: widget.tabController,
         tabs: const <Widget>[
           Tab(
-            text: (UiText.homeScreenCategoryPopular),
+            text: (UiString.homeScreenCategoryPopular),
             icon: Icon(
               Icons.star,
               color: Colors.black,
             ),
           ),
           Tab(
-            text: (UiText.homeScreenPlayNow),
+            text: (UiString.homeScreenPlayNow),
             icon: Icon(Icons.play_circle),
           ),
           Tab(
-            text: (UiText.homeScreenCategoryTopRated),
+            text: (UiString.homeScreenCategoryTopRated),
             icon: Icon(Icons.rate_review),
           ),
           Tab(
-            text: (UiText.homeScreenCategoryUpcoming),
+            text: (UiString.homeScreenCategoryUpcoming),
             icon: Icon(Icons.upcoming),
           ),
         ],

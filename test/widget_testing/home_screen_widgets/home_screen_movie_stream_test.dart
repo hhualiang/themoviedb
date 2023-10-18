@@ -32,6 +32,7 @@ void main() {
     hasVideo: false,
     movieRating: 10,
     voteCount: 200,
+    category: [],
   );
 
   testWidgets('Verify that the MovieStreamBuilder widget renders correctly',

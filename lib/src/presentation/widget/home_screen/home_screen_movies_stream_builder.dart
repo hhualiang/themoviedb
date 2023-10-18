@@ -12,6 +12,10 @@ class MovieStreamBuilder extends StatelessWidget {
   });
 
   final Stream<MovieState> stream;
+  static const String _emptyMessage =
+      'There was a problem loading the movies... Try again later.';
+  static const String _failedMessage =
+      'There was a problem loading the movies... Please check your connection and try again later.';
 
   @override
   Widget build(BuildContext context) {
@@ -26,10 +30,15 @@ class MovieStreamBuilder extends StatelessWidget {
           case BaseState.success:
             return MovieGridView(movieList: snapshot.data!.movieList!);
           case BaseState.empty:
-            return const SizedBox.shrink();
+            return const Center(
+              child: Text(_emptyMessage),
+            );
           case BaseState.failure:
-            return Center(
-              child: Text(snapshot.data!.error!),
+            return const Center(
+              child: Text(
+                _failedMessage,
+                textAlign: TextAlign.center,
+              ),
             );
           case BaseState.loading:
             return const Center(

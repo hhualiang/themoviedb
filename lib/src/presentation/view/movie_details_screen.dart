@@ -100,67 +100,73 @@ class _ScreenMovieDetailsState extends State<ScreenMovieDetails> {
     );
     movieGenreController.initialize();
     return Scaffold(
+      extendBody: true,
       appBar: MovieAppBar(
         movieTitle: widget.movie.originalTitle,
       ),
-      body: Container(
-        color: Colors.black,
-        child: Column(
-          children: <Widget>[
-            MovieBasicInfoDisplay(
-              movie: widget.movie,
-            ),
-            GenresSection(
-              genresIds: widget.movie.genreIds,
-              genresStream: movieGenreController.genresStream,
-            ),
-            Column(
+      body: SingleChildScrollView(
+        child: Container(
+          color: Colors.black,
+          child: SizedBox(
+            height: MediaQuery.of(context).size.height,
+            child: Column(
               children: <Widget>[
-                const TitleText(
-                  text: _overviewLabel,
+                MovieBasicInfoDisplay(
+                  movie: widget.movie,
                 ),
-                ContainerOverview(
-                  overviewText: widget.movie.overviewText,
+                GenresSection(
+                  genresIds: widget.movie.genreIds,
+                  genresStream: movieGenreController.genresStream,
                 ),
-              ],
-            ),
-            _verticalSpacer(
-              _verticalSpacerValue,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[
-                ContainerCounter(
-                  counter: _counter,
-                ),
-                _horizontalSpacer(
-                  _horizontalSpacerValue,
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    _changeCounter(
-                      CounterAction.increment,
-                    );
-                  },
-                  style: buttonStyle,
-                  child: IconButton(
-                    icon: const Icon(
-                      Icons.thumb_up,
+                Column(
+                  children: <Widget>[
+                    const TitleText(
+                      text: _overviewLabel,
                     ),
-                    color: Colors.black,
-                    onPressed: () {
-                      _changeCounter(
-                        CounterAction.increment,
-                      );
-                    },
-                  ),
+                    ContainerOverview(
+                      overviewText: widget.movie.overviewText,
+                    ),
+                  ],
                 ),
-                _horizontalSpacer(
-                  _horizontalSpacerValue,
+                _verticalSpacer(
+                  _verticalSpacerValue,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    ContainerCounter(
+                      counter: _counter,
+                    ),
+                    _horizontalSpacer(
+                      _horizontalSpacerValue,
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        _changeCounter(
+                          CounterAction.increment,
+                        );
+                      },
+                      style: buttonStyle,
+                      child: IconButton(
+                        icon: const Icon(
+                          Icons.thumb_up,
+                        ),
+                        color: Colors.black,
+                        onPressed: () {
+                          _changeCounter(
+                            CounterAction.increment,
+                          );
+                        },
+                      ),
+                    ),
+                    _horizontalSpacer(
+                      _horizontalSpacerValue,
+                    ),
+                  ],
                 ),
               ],
             ),
-          ],
+          ),
         ),
       ),
     );

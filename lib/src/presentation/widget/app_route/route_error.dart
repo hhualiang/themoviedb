@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/util/ui_text.dart';
+import '../../../core/util/ui_string.dart';
 
 class ErrorRoute {
   static Route<dynamic> routeError() {
@@ -9,12 +9,12 @@ class ErrorRoute {
         return Scaffold(
           appBar: AppBar(
             title: const Text(
-              UiText.routeError,
+              UiString.routeError,
             ),
           ),
           body: const Center(
             child: Text(
-              UiText.routeError,
+              UiString.routeError,
             ),
           ),
         );
