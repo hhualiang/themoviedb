@@ -3,8 +3,10 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../core/util/enum_classes.dart';
+import '../../core/util/local_push_notification.dart';
 import '../../domain/entity/movie.dart';
 import '../bloc/movie_genres_controller.dart';
+import '../widget/movie_screen/favourite_button.dart';
 import '../widget/movie_screen/movie_genres/genres_section.dart';
 import '../widget/movie_screen/movie_overview/container_overview.dart';
 import '../widget/movie_screen/movie_screen_information.dart';
@@ -164,6 +166,7 @@ class _ScreenMovieDetailsState extends State<ScreenMovieDetails> {
                     ),
                   ],
                 ),
+                FavouriteButton(movieId: widget.movie.id,),
               ],
             ),
           ),

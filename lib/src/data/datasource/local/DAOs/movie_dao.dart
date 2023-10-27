@@ -1,5 +1,6 @@
 import 'package:floor/floor.dart';
 
+import '../../../../domain/entity/fav_movie.dart';
 import '../../../../domain/entity/movie.dart';
 
 @dao
@@ -12,4 +13,7 @@ abstract class MovieDao {
 
   @Insert(onConflict: OnConflictStrategy.replace)
   Future<void> insertMovie(Movie movie);
+
+  @Insert(onConflict: OnConflictStrategy.replace)
+  Future<void> insertFavourte(FavouriteMovie favourteMovie);
 }

@@ -3,12 +3,14 @@ import 'package:provider/provider.dart';
 
 import 'src/app.dart';
 import 'src/core/util/dependency_initializer.dart';
+import 'src/core/util/local_push_notification.dart';
 import 'src/data/datasource/local/movie_database.dart';
 import 'src/presentation/bloc/movie_controller.dart';
 import 'src/presentation/bloc/movie_genres_controller.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  LocalPushNotificationPlugin().initNotification();
   final DependencyInitializer dependencyInitializer = DependencyInitializer();
   await dependencyInitializer.initialize();
   runApp(
