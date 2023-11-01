@@ -25,6 +25,7 @@ class _FavouriteButtonState extends State<FavouriteButton> {
   static const String _removedFavouriteTitle = 'Removed from Favourites';
   static const String _removedFavouriteBody =
       'The movie has been removed form Favourites';
+  static const double _favIconSize = 45;
 
   Future<void> _toggleFavourite(
     FavouriteMovieController favouriteMovieController,
@@ -51,10 +52,12 @@ class _FavouriteButtonState extends State<FavouriteButton> {
           id: widget.movieId,
         ),
       );
-      LocalPushNotificationPlugin().showNotification(
-        title: _removedFavouriteTitle,
-        body: _removedFavouriteBody,
-      );
+      await favouriteMovieController.initialize().then(
+            (_) => LocalPushNotificationPlugin().showNotification(
+              title: _removedFavouriteTitle,
+              body: _removedFavouriteBody,
+            ),
+          );
     }
   }
 
@@ -89,18 +92,20 @@ class _FavouriteButtonState extends State<FavouriteButton> {
       context,
       listen: false,
     );
-    return FloatingActionButton(
-      backgroundColor: Colors.white,
+    return IconButton(
       onPressed: () {
         _toggleFavourite(favouriteMovieController);
       },
-      child: _favourite
+      icon: _favourite
           ? const Icon(
               Icons.favorite,
               color: Colors.red,
+              size: _favIconSize,
             )
           : const Icon(
-              Icons.favorite_border,
+              Icons.favorite,
+              color: Colors.white,
+              size: _favIconSize,
             ),
     );
   }

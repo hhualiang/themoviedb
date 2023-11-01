@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 
 import '../../domain/entity/movie.dart';
 import '../bloc/movie_genres_controller.dart';
-import '../widget/movie_screen/favourite_button.dart';
 import '../widget/movie_screen/movie_genres/genres_section.dart';
 import '../widget/movie_screen/movie_overview/container_overview.dart';
 import '../widget/movie_screen/movie_screen_information.dart';
@@ -95,9 +94,6 @@ class _ScreenMovieDetailsState extends State<ScreenMovieDetails> {
                       _horizontalSpacerValue,
                     ),
                   ],
-                ),
-                FavouriteButton(
-                  movieId: widget.movie.id,
                 ),
               ],
             ),

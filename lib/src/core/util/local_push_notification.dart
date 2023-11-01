@@ -1,15 +1,19 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+
+import '../../config/route/route_names.dart';
 
 void onDidReceiveBackgroundNotificationResponse(
   NotificationResponse notificationResponse,
 ) {}
 
 class LocalPushNotificationPlugin {
-  static const String _logoName = 'mdlogo';
+  static const String _logoName = 'flutter_logo';
+
   final FlutterLocalNotificationsPlugin notificationsPlugin =
       FlutterLocalNotificationsPlugin();
 
-  Future<void> initNotification() async {
+  Future<void> initNotification(GlobalKey<NavigatorState> navigatorKey) async {
     AndroidInitializationSettings androidInitializationSettings =
         const AndroidInitializationSettings(_logoName);
 
@@ -19,7 +23,12 @@ class LocalPushNotificationPlugin {
       initializationSettings,
       onDidReceiveBackgroundNotificationResponse:
           onDidReceiveBackgroundNotificationResponse,
-      onDidReceiveNotificationResponse: (NotificationResponse details) {},
+      onDidReceiveNotificationResponse: (NotificationResponse details) {
+        Navigator.pushNamed(
+          navigatorKey.currentContext!,
+          RouteNames.favouriteMovies,
+        );
+      },
     );
   }
 
