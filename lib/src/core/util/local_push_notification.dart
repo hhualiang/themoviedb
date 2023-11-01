@@ -9,7 +9,8 @@ void onDidReceiveBackgroundNotificationResponse(
 
 class LocalPushNotificationPlugin {
   static const String _logoName = 'flutter_logo';
-
+  static const String _channelID = 'channelId';
+  static const String _channelName = 'channelName';
   final FlutterLocalNotificationsPlugin notificationsPlugin =
       FlutterLocalNotificationsPlugin();
 
@@ -50,8 +51,8 @@ class LocalPushNotificationPlugin {
   notificationDetails() {
     return const NotificationDetails(
       android: AndroidNotificationDetails(
-        'channelId',
-        'channelName',
+        _channelID,
+        _channelName,
         importance: Importance.max,
         priority: Priority.high,
       ),

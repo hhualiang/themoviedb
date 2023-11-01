@@ -14,10 +14,11 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
+  static const String _debugLabel = 'Main Navigator';
   LocalPushNotificationPlugin pushNotificationPlugin =
       LocalPushNotificationPlugin();
   final GlobalKey<NavigatorState> navigatorKey =
-      GlobalKey(debugLabel: "Main Navigator");
+      GlobalKey(debugLabel: _debugLabel);
 
   @override
   void initState() {
