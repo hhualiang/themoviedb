@@ -1,15 +1,17 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 void onDidReceiveBackgroundNotificationResponse(
-    NotificationResponse notificationResponse) {}
+  NotificationResponse notificationResponse,
+) {}
 
 class LocalPushNotificationPlugin {
+  static const String _logoName = 'mdlogo';
   final FlutterLocalNotificationsPlugin notificationsPlugin =
       FlutterLocalNotificationsPlugin();
 
   Future<void> initNotification() async {
     AndroidInitializationSettings androidInitializationSettings =
-        const AndroidInitializationSettings('flutter_logo');
+        const AndroidInitializationSettings(_logoName);
 
     InitializationSettings initializationSettings =
         InitializationSettings(android: androidInitializationSettings);
@@ -27,8 +29,12 @@ class LocalPushNotificationPlugin {
     String? body,
     String? payLoad,
   }) async {
-    await notificationsPlugin.show(id, title, body, notificationDetails(),
-        payload: 'aaa');
+    await notificationsPlugin.show(
+      id,
+      title,
+      body,
+      notificationDetails(),
+    );
     return;
   }
 

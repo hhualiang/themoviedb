@@ -15,5 +15,14 @@ abstract class MovieDao {
   Future<void> insertMovie(Movie movie);
 
   @Insert(onConflict: OnConflictStrategy.replace)
-  Future<void> insertFavourte(FavouriteMovie favourteMovie);
+  Future<void> insertFavouriteMovie(FavouriteMovies favouriteMovies);
+
+  @Query('SELECT * FROM Movie JOIN FavouriteMovies using(id)')
+  Future<List<Movie>> getFavMovies();
+
+  @delete
+  Future<void> deleteFavouriteMovie(FavouriteMovies favouriteMovies);
+
+  @Query('SELECT * FROM FavouriteMovies where id = :id')
+  Future<int?> selectFavById(int id);
 }

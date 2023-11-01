@@ -24,7 +24,7 @@ part 'movie_database.g.dart';
   entities: <Type>[
     Movie,
     MovieGenre,
-    FavouriteMovie,
+    FavouriteMovies,
   ],
 )
 abstract class MovieDatabase extends FloorDatabase {

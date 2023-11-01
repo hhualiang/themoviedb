@@ -47,7 +47,7 @@ class MovieBasicInfoDisplay extends StatelessWidget {
                     releaseDate: movie.releaseDate,
                   ),
                   RatingRow(
-                    rating: movie.movieRating.toString(),
+                    rating: movie.movieRating.toStringAsFixed(1),
                   ),
                 ],
               ),

@@ -1,5 +1,5 @@
 import '../../entity/fav_movie.dart';
 
 abstract class ISaveFavMovieUseCase {
-  void saveFavMovie(FavouriteMovie favouriteMovie);
+  void saveFavMovie(FavouriteMovies favouriteMovie);
 }

@@ -1,9 +1,11 @@
 import 'package:floor/floor.dart';
 
 @Entity(tableName: 'FavouriteMovies')
-class FavouriteMovie {
+class FavouriteMovies {
+  @primaryKey
+  final int id;
 
-  final int movieID;
-
-  FavouriteMovie( this.movieID);
+  FavouriteMovies({
+    required this.id,
+  });
 }

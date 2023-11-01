@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../domain/entity/movie.dart';
 import '../../presentation/view/about_the_app_screen.dart';
+import '../../presentation/view/favourite_screen.dart';
 import '../../presentation/view/home_screen.dart';
 import '../../presentation/view/initial_loading_screen.dart';
 import '../../presentation/view/movie_details_screen.dart';
@@ -27,6 +28,10 @@ class RouteGenerator {
       case RouteNames.aboutTheApp:
         return MaterialPageRoute<dynamic>(
           builder: (_) => const AboutTheApp(),
+        );
+      case RouteNames.favouriteMovies:
+        return MaterialPageRoute<dynamic>(
+          builder: (_) => const FavouritePage(),
         );
       default:
         return ErrorRoute.routeError();

@@ -9,12 +9,12 @@ import 'package:themovietb/src/presentation/bloc/movie_genres_controller.dart';
 class MockUseCase extends Mock implements GetGenresUseCase {}
 
 void main() {
-  late MovieGenresController genreBloc;
+  late MovieDetailsController genreBloc;
   late GetGenresUseCase getGenresUseCase;
 
   setUp(() {
     getGenresUseCase = MockUseCase();
-    genreBloc = MovieGenresController(getGenresUseCase: getGenresUseCase);
+    genreBloc = MovieDetailsController(getGenresUseCase: getGenresUseCase);
   });
   final mockResult = [
     MovieGenre(id: 1, name: 'action'),
