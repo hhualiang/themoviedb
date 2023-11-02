@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../../src/core/util/ui_string.dart';
-import '../upcoming_alert_dialog.dart';
 
 class HomeScreenAppBar extends StatefulWidget implements PreferredSizeWidget {
   static const double _preferredSize = 130;
@@ -42,16 +41,29 @@ class _HomeScreenAppBarState extends State<HomeScreenAppBar>
       ),
       actions: <Widget>[
         IconButton(
-          onPressed: () {
-            ShowUpcomingAlertDialog.showAlertDialog(
-              context,
-            );
-          },
-          icon: const Icon(
-            Icons.search,
-          ),
-        )
+          icon: const Icon(Icons.search),
+          onPressed: () {},
+        ),
       ],
+      flexibleSpace: Row(
+        children: [
+          const SizedBox(
+            width: 250,
+            height: 100,
+            child: TextField(
+              obscureText: true,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Password',
+              ),
+            ),
+          ),
+          IconButton(
+            icon: const Icon(Icons.search),
+            onPressed: () {},
+          ),
+        ],
+      ),
       bottom: TabBar(
         labelColor: MaterialStateColor.resolveWith(
           (Set<MaterialState> states) => Colors.black,
@@ -85,11 +97,7 @@ class _HomeScreenAppBarState extends State<HomeScreenAppBar>
           ),
         ],
         onTap: (int int) {
-          try {
-            widget.pageController.jumpToPage(widget.tabController.index);
-          } catch (e) {
-            //showDialog(context: context, builder: Dialog('No internet conection'))
-          }
+          widget.pageController.jumpToPage(widget.tabController.index);
         },
       ),
     );

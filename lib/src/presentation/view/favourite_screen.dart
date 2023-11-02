@@ -5,22 +5,33 @@ import '../bloc/fav_movie_controller.dart';
 import '../widget/home_screen/home_screen_movies_stream_builder.dart';
 import '../widget/upcoming_alert_dialog.dart';
 
-class FavouritePage extends StatelessWidget {
+class FavouritePage extends StatefulWidget {
   const FavouritePage({super.key});
 
   static const String _appBarTitle = 'My favourite movies';
 
   @override
-  Widget build(BuildContext context) {
-    final FavouriteMovieController movieController =
-        Provider.of<FavouriteMovieController>(context);
+  State<FavouritePage> createState() => _FavouritePageState();
+}
+
+class _FavouritePageState extends State<FavouritePage> {
+  late FavouriteMovieController movieController;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    movieController = Provider.of<FavouriteMovieController>(context);
     movieController.initialize();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
         iconTheme: const IconThemeData(color: Colors.black),
         title: const Text(
-          _appBarTitle,
+          FavouritePage._appBarTitle,
           style: TextStyle(
             color: Colors.black,
           ),

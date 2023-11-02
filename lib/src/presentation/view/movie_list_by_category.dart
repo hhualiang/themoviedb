@@ -17,20 +17,62 @@ class MoviesByCategory extends StatefulWidget {
 }
 
 class _MoviesByCategoryState extends State<MoviesByCategory> {
+  String lastInputValue = '';
+  late MovieController movieController;
+
   @override
-  @override
-  Widget build(BuildContext context) {
-    final MovieController movieController = Provider.of<MovieController>(
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    movieController = Provider.of<MovieController>(
       context,
       listen: false,
     );
+
     movieController.fetchMovieByCategory(widget.category);
+    fieldText.clear();
+  }
+
+  final fieldText = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
         width: MediaQuery.of(context).size.width,
         color: Colors.black,
-        child: MovieStreamBuilder(
-          stream: movieController.moviesStream,
+        child: Column(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(8.0),
+              child: TextField(
+                onChanged: (String text) {
+                  movieController.searchMovie(
+                    text,
+                    widget.category,
+                  );
+                },
+                controller: fieldText,
+                decoration: InputDecoration(
+                  suffixIcon: const Icon(Icons.search),
+                  hintText: 'Search',
+                  contentPadding:
+                      const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                  border: OutlineInputBorder(
+                    borderSide: const BorderSide(width: 3.1, color: Colors.red),
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Expanded(
+              child: MovieStreamBuilder(
+                stream: movieController.moviesStream,
+              ),
+            ),
+          ],
         ),
       ),
     );

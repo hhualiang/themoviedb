@@ -12,6 +12,8 @@ class MovieController extends IMovieController {
       StreamController<MovieState>.broadcast();
   final GetMoviesUseCase getMoviesUseCase;
 
+  DataState<List<Movie>>? movies;
+
   MovieController({
     required this.getMoviesUseCase,
   });
@@ -50,4 +52,24 @@ class MovieController extends IMovieController {
 
   @override
   Stream<MovieState> get moviesStream => _moviesController.stream;
+
+  Future<void> searchMovie(
+    String searchQuery,
+    String category,
+  ) async {
+    final List<Movie> searchResult = [];
+    movies ??= await getMoviesUseCase.getMovieList(category);
+    final totalMovies = movies!.data!;
+    _moviesController.sink.add(MovieState.loading());
+    if (searchQuery.isEmpty) {
+      _moviesController.sink.add(MovieState.success(movieList: totalMovies));
+      return;
+    }
+    for (final movie in totalMovies) {
+      if (movie.title.toLowerCase().contains(searchQuery.toLowerCase())) {
+        searchResult.add(movie);
+      }
+    }
+    _moviesController.sink.add(MovieState.success(movieList: searchResult));
+  }
 }
