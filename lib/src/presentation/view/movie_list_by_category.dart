@@ -32,7 +32,7 @@ class _MoviesByCategoryState extends State<MoviesByCategory> {
     fieldText.clear();
   }
 
-  final fieldText = TextEditingController();
+  final TextEditingController fieldText = TextEditingController();
 
   @override
   Widget build(BuildContext context) {

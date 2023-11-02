@@ -39,12 +39,6 @@ class _HomeScreenAppBarState extends State<HomeScreenAppBar>
           color: Colors.black,
         ),
       ),
-      actions: <Widget>[
-        IconButton(
-          icon: const Icon(Icons.search),
-          onPressed: () {},
-        ),
-      ],
       flexibleSpace: Row(
         children: [
           const SizedBox(

@@ -71,7 +71,9 @@ class _FavouriteButtonState extends State<FavouriteButton> {
       });
     }
   }
+
   late FavouriteMovieController favouriteMovieController;
+
   @override
   void initState() {
     super.initState();
@@ -84,9 +86,9 @@ class _FavouriteButtonState extends State<FavouriteButton> {
       _checkExist(favouriteMovieController);
     });
   }
+
   @override
   Widget build(BuildContext context) {
-
     return IconButton(
       onPressed: () {
         _toggleFavourite(favouriteMovieController);
