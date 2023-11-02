@@ -17,6 +17,13 @@ class MoviesByCategory extends StatefulWidget {
 }
 
 class _MoviesByCategoryState extends State<MoviesByCategory> {
+  static const double _padding = 8.0;
+  static const double _horizontalEdgePadding = 30;
+  static const double _verticalEdgePadding = 10;
+  static const double _borderSideWidth = 3.1;
+  static const double _borderRadius = 30;
+  static const double _sizedBoxHeight = 10;
+
   String lastInputValue = '';
   late MovieController movieController;
 
@@ -43,7 +50,7 @@ class _MoviesByCategoryState extends State<MoviesByCategory> {
         child: Column(
           children: [
             Container(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(_padding),
               child: TextField(
                 onChanged: (String text) {
                   movieController.searchMovie(
@@ -55,17 +62,22 @@ class _MoviesByCategoryState extends State<MoviesByCategory> {
                 decoration: InputDecoration(
                   suffixIcon: const Icon(Icons.search),
                   hintText: 'Search',
-                  contentPadding:
-                      const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                  contentPadding: const EdgeInsets.symmetric(
+                    horizontal: _horizontalEdgePadding,
+                    vertical: _verticalEdgePadding,
+                  ),
                   border: OutlineInputBorder(
-                    borderSide: const BorderSide(width: 3.1, color: Colors.red),
-                    borderRadius: BorderRadius.circular(30),
+                    borderSide: const BorderSide(
+                      width: _borderSideWidth,
+                      color: Colors.red,
+                    ),
+                    borderRadius: BorderRadius.circular(_borderRadius),
                   ),
                 ),
               ),
             ),
             const SizedBox(
-              height: 10,
+              height: _sizedBoxHeight,
             ),
             Expanded(
               child: MovieStreamBuilder(
