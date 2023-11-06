@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../../src/core/util/ui_string.dart';
-import '../upcoming_alert_dialog.dart';
 
 class HomeScreenAppBar extends StatefulWidget implements PreferredSizeWidget {
   static const double _preferredSize = 130;
@@ -24,6 +23,8 @@ class HomeScreenAppBar extends StatefulWidget implements PreferredSizeWidget {
 
 class _HomeScreenAppBarState extends State<HomeScreenAppBar>
     with TickerProviderStateMixin {
+  static const double _sizedBoxWidth = 250;
+  static const double _sizedBoxHeight = 100;
   @override
   void initState() {
     super.initState();
@@ -40,18 +41,25 @@ class _HomeScreenAppBarState extends State<HomeScreenAppBar>
           color: Colors.black,
         ),
       ),
-      actions: <Widget>[
-        IconButton(
-          onPressed: () {
-            ShowUpcomingAlertDialog.showAlertDialog(
-              context,
-            );
-          },
-          icon: const Icon(
-            Icons.search,
+      flexibleSpace: Row(
+        children: <Widget>[
+          const SizedBox(
+            width: _sizedBoxWidth,
+            height: _sizedBoxHeight,
+            child: TextField(
+              obscureText: true,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Password',
+              ),
+            ),
           ),
-        )
-      ],
+          IconButton(
+            icon: const Icon(Icons.search),
+            onPressed: () {},
+          ),
+        ],
+      ),
       bottom: TabBar(
         labelColor: MaterialStateColor.resolveWith(
           (Set<MaterialState> states) => Colors.black,
@@ -85,11 +93,7 @@ class _HomeScreenAppBarState extends State<HomeScreenAppBar>
           ),
         ],
         onTap: (int int) {
-          try {
-            widget.pageController.jumpToPage(widget.tabController.index);
-          } catch (e) {
-            //showDialog(context: context, builder: Dialog('No internet conection'))
-          }
+          widget.pageController.jumpToPage(widget.tabController.index);
         },
       ),
     );

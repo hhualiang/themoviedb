@@ -11,6 +11,8 @@ class AppDrawerFormat extends StatelessWidget {
   static const String _drawerTitle = 'Movie DB';
   static const String _drawerOptionHome = 'Home';
   static const String _drawerOptionAboutTheApp = 'About the app';
+  static const String _drawerOptionFavouriteMovies = 'My favourites';
+  static const double _verticalSpacerValue = 5;
 
   const AppDrawerFormat({
     super.key,
@@ -39,6 +41,13 @@ class AppDrawerFormat extends StatelessWidget {
         DrawerListTile(
           section: _drawerOptionHome,
           route: RouteNames.home,
+        ),
+        SizedBox(
+          height: _verticalSpacerValue,
+        ),
+        DrawerListTile(
+          section: _drawerOptionFavouriteMovies,
+          route: RouteNames.favouriteMovies,
         ),
         DrawerListTile(
           section: _drawerOptionAboutTheApp,

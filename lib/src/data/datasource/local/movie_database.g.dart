@@ -90,6 +90,8 @@ class _$MovieDatabase extends MovieDatabase {
             'CREATE TABLE IF NOT EXISTS `Movie` (`adult` INTEGER NOT NULL, `backdropPath` TEXT NOT NULL, `genreIds` TEXT NOT NULL, `id` INTEGER NOT NULL, `originalLanguage` TEXT NOT NULL, `originalTitle` TEXT NOT NULL, `overviewText` TEXT NOT NULL, `popularity` TEXT NOT NULL, `posterPath` TEXT NOT NULL, `releaseDate` TEXT NOT NULL, `title` TEXT NOT NULL, `hasVideo` INTEGER NOT NULL, `movieRating` TEXT NOT NULL, `voteCount` INTEGER NOT NULL, `category` TEXT NOT NULL, PRIMARY KEY (`id`))');
         await database.execute(
             'CREATE TABLE IF NOT EXISTS `MovieGenre` (`id` INTEGER NOT NULL, `name` TEXT NOT NULL, PRIMARY KEY (`id`))');
+        await database.execute(
+            'CREATE TABLE IF NOT EXISTS `FavouriteMovies` (`id` INTEGER NOT NULL, PRIMARY KEY (`id`))');
 
         await callback?.onCreate?.call(database, version);
       },
@@ -132,7 +134,16 @@ class _$MovieDao extends MovieDao {
                   'movieRating': _popularityConverter.encode(item.movieRating),
                   'voteCount': item.voteCount,
                   'category': _categoryListConverter.encode(item.category)
-                });
+                }),
+        _favouriteMoviesInsertionAdapter = InsertionAdapter(
+            database,
+            'FavouriteMovies',
+            (FavouriteMovies item) => <String, Object?>{'id': item.id}),
+        _favouriteMoviesDeletionAdapter = DeletionAdapter(
+            database,
+            'FavouriteMovies',
+            ['id'],
+            (FavouriteMovies item) => <String, Object?>{'id': item.id});
 
   final sqflite.DatabaseExecutor database;
 
@@ -141,6 +152,10 @@ class _$MovieDao extends MovieDao {
   final QueryAdapter _queryAdapter;
 
   final InsertionAdapter<Movie> _movieInsertionAdapter;
+
+  final InsertionAdapter<FavouriteMovies> _favouriteMoviesInsertionAdapter;
+
+  final DeletionAdapter<FavouriteMovies> _favouriteMoviesDeletionAdapter;
 
   @override
   Future<List<Movie>> getAllMovies(String cat) async {
@@ -192,8 +207,51 @@ class _$MovieDao extends MovieDao {
   }
 
   @override
+  Future<List<Movie>> getFavMovies() async {
+    return _queryAdapter.queryList(
+        'SELECT * FROM Movie JOIN FavouriteMovies using(id)',
+        mapper: (Map<String, Object?> row) => Movie(
+            adult: (row['adult'] as int) != 0,
+            backdropPath: row['backdropPath'] as String,
+            genreIds: _genresListConverter.decode(row['genreIds'] as String),
+            id: row['id'] as int,
+            originalLanguage: row['originalLanguage'] as String,
+            originalTitle: row['originalTitle'] as String,
+            overviewText: row['overviewText'] as String,
+            popularity:
+                _popularityConverter.decode(row['popularity'] as String),
+            posterPath: row['posterPath'] as String,
+            releaseDate: row['releaseDate'] as String,
+            title: row['title'] as String,
+            hasVideo: (row['hasVideo'] as int) != 0,
+            movieRating:
+                _popularityConverter.decode(row['movieRating'] as String),
+            voteCount: row['voteCount'] as int,
+            category:
+                _categoryListConverter.decode(row['category'] as String)));
+  }
+
+  @override
+  Future<int?> selectFavById(int id) async {
+    return _queryAdapter.query('SELECT * FROM FavouriteMovies where id = ?1',
+        mapper: (Map<String, Object?> row) => row.values.first as int,
+        arguments: [id]);
+  }
+
+  @override
   Future<void> insertMovie(Movie movie) async {
     await _movieInsertionAdapter.insert(movie, OnConflictStrategy.replace);
+  }
+
+  @override
+  Future<void> insertFavouriteMovie(FavouriteMovies favouriteMovies) async {
+    await _favouriteMoviesInsertionAdapter.insert(
+        favouriteMovies, OnConflictStrategy.replace);
+  }
+
+  @override
+  Future<void> deleteFavouriteMovie(FavouriteMovies favouriteMovies) async {
+    await _favouriteMoviesDeletionAdapter.delete(favouriteMovies);
   }
 }
 

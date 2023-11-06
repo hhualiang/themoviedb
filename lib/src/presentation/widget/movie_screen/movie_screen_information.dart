@@ -4,6 +4,7 @@ import '../../../core/util/widget_keys.dart';
 import '../../../domain/entity/movie.dart';
 import '../movie_photos/large_photo.dart';
 import '../movie_photos/small_photo_container.dart';
+import 'favourite_button.dart';
 import 'movie_information/basic_information/movie_title.dart';
 import 'movie_information/basic_information/rating_row.dart';
 import 'movie_information/basic_information/release_date.dart';
@@ -14,6 +15,8 @@ class MovieBasicInfoDisplay extends StatelessWidget {
   static const double _paddingLeft = 170;
   static const double _paddingTop = 30;
   static const double _paddingBottom = 40;
+  static const double _iconTopPosition = 5;
+  static const double _iconRightPosition = 10;
 
   const MovieBasicInfoDisplay({
     super.key,
@@ -47,7 +50,7 @@ class MovieBasicInfoDisplay extends StatelessWidget {
                     releaseDate: movie.releaseDate,
                   ),
                   RatingRow(
-                    rating: movie.movieRating.toString(),
+                    rating: movie.movieRating.toStringAsFixed(1),
                   ),
                 ],
               ),
@@ -59,6 +62,13 @@ class MovieBasicInfoDisplay extends StatelessWidget {
           left: _positionLeft,
           child: SmallPhotoContainer(
             url: movie.posterPath,
+          ),
+        ),
+        Positioned(
+          top: _iconTopPosition,
+          right: _iconRightPosition,
+          child: FavouriteButton(
+            movieId: movie.id,
           ),
         ),
       ],

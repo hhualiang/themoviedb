@@ -1,3 +1,4 @@
+import '../../../domain/entity/fav_movie.dart';
 import '../../../domain/entity/movie.dart';
 import '../../../domain/entity/movie_genre.dart';
 import '../../../domain/repository/i_database_repository.dart';
@@ -47,5 +48,25 @@ class DatabaseRepository implements IDatabaseRepository {
   @override
   Future<void> saveGenre(MovieGenre movieGenre) async {
     await _movieDatabase.movieGenreDao.insertGenre(movieGenre);
+  }
+
+  @override
+  Future<List<Movie>> getFavMovies() async {
+    return _movieDatabase.movieDao.getFavMovies();
+  }
+
+  @override
+  Future<void> saveFavMovie(FavouriteMovies favouriteMovie) async {
+    await _movieDatabase.movieDao.insertFavouriteMovie(favouriteMovie);
+  }
+
+  @override
+  Future<void> deleteFavMovie(FavouriteMovies favouriteMovies) async {
+    await _movieDatabase.movieDao.deleteFavouriteMovie(favouriteMovies);
+  }
+
+  @override
+  Future<int?> getFavMovieById(int id) {
+    return _movieDatabase.movieDao.selectFavById(id);
   }
 }

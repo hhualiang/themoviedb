@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../core/util/enum_classes.dart';
 import '../../domain/entity/movie.dart';
 import '../bloc/movie_genres_controller.dart';
 import '../widget/movie_screen/movie_genres/genres_section.dart';
 import '../widget/movie_screen/movie_overview/container_overview.dart';
 import '../widget/movie_screen/movie_screen_information.dart';
-import '../widget/movie_screen/movie_screen_like_counter.dart';
 import '../widget/movie_screen/movie_screen_movie_app_bar.dart';
 import '../widget/movie_screen/movie_screen_title_text_style.dart';
 
@@ -27,11 +24,8 @@ class ScreenMovieDetails extends StatefulWidget {
 class _ScreenMovieDetailsState extends State<ScreenMovieDetails> {
   static const double _verticalSpacerValue = 15;
   static const double _horizontalSpacerValue = 30;
-  static const int _initialCounterValue = 0;
-  static const int _incrementValue = 1;
-  static const String _sharedPreferencesKeyCounter = 'counter';
   static const String _overviewLabel = 'Overview';
-  int _counter = _initialCounterValue;
+
   final ButtonStyle buttonStyle = ElevatedButton.styleFrom(
     backgroundColor: Colors.white,
   );
@@ -39,44 +33,6 @@ class _ScreenMovieDetailsState extends State<ScreenMovieDetails> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback(
-      (_) async {
-        sharedPreferenceInstance = await SharedPreferences.getInstance();
-        _changeCounter(
-          CounterAction.load,
-        );
-      },
-    );
-  }
-
-  late final SharedPreferences sharedPreferenceInstance;
-
-  void _changeCounter(CounterAction action) {
-    setState(
-      () {
-        switch (action) {
-          case CounterAction.load:
-            _counter = (sharedPreferenceInstance.getInt(
-                  _sharedPreferencesKeyCounter,
-                ) ??
-                _initialCounterValue);
-            break;
-          case CounterAction.increment:
-            _counter = (sharedPreferenceInstance.getInt(
-                      _sharedPreferencesKeyCounter,
-                    ) ??
-                    _initialCounterValue) +
-                _incrementValue;
-            sharedPreferenceInstance.setInt(
-              _sharedPreferencesKeyCounter,
-              _counter,
-            );
-            break;
-          default:
-            break;
-        }
-      },
-    );
   }
 
   Widget _horizontalSpacer(double width) {
@@ -93,8 +49,8 @@ class _ScreenMovieDetailsState extends State<ScreenMovieDetails> {
 
   @override
   Widget build(BuildContext context) {
-    final MovieGenresController movieGenreController =
-        Provider.of<MovieGenresController>(
+    final MovieDetailsController movieGenreController =
+        Provider.of<MovieDetailsController>(
       context,
       listen: false,
     );
@@ -134,31 +90,6 @@ class _ScreenMovieDetailsState extends State<ScreenMovieDetails> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
-                    ContainerCounter(
-                      counter: _counter,
-                    ),
-                    _horizontalSpacer(
-                      _horizontalSpacerValue,
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        _changeCounter(
-                          CounterAction.increment,
-                        );
-                      },
-                      style: buttonStyle,
-                      child: IconButton(
-                        icon: const Icon(
-                          Icons.thumb_up,
-                        ),
-                        color: Colors.black,
-                        onPressed: () {
-                          _changeCounter(
-                            CounterAction.increment,
-                          );
-                        },
-                      ),
-                    ),
                     _horizontalSpacer(
                       _horizontalSpacerValue,
                     ),

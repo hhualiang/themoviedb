@@ -6,7 +6,7 @@ class HomeScreenMovieRating extends StatelessWidget {
   static const int _movieRatingDividedByTwo = 2;
   static const int _maxStarNumber = 5;
   static const double _sizedBoxWidth = 10;
-  static const double _circleAvatarRadius = 12;
+  static const double _circleAvatarRadius = 15;
   static const double _fontSize = 13;
   final num rating;
 
@@ -58,7 +58,7 @@ class HomeScreenMovieRating extends StatelessWidget {
           radius: _circleAvatarRadius,
           backgroundColor: Colors.amber,
           child: Text(
-            rating.toString(),
+            rating.toStringAsFixed(1),
             style: const TextStyle(
               fontSize: _fontSize,
               color: Colors.black,

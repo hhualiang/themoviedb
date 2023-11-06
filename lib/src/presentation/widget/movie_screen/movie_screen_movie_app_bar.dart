@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/util/widget_keys.dart';
-import '../upcoming_alert_dialog.dart';
 
 class MovieAppBar extends StatelessWidget implements PreferredSizeWidget {
   const MovieAppBar({
@@ -30,16 +29,6 @@ class MovieAppBar extends StatelessWidget implements PreferredSizeWidget {
           Navigator.pop(context);
         },
       ),
-      actions: <Widget>[
-        IconButton(
-          icon: const Icon(
-            Icons.search,
-          ),
-          onPressed: () {
-            ShowUpcomingAlertDialog.showAlertDialog(context);
-          },
-        ),
-      ],
     );
   }
 }

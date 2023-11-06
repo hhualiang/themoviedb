@@ -7,12 +7,12 @@ import '../../domain/entity/genre_state.dart';
 import '../../domain/entity/movie_genre.dart';
 import '../../domain/usecase/usecase_impl/get_genres_usecase_impl.dart';
 
-class MovieGenresController extends IMovieGenreController {
+class MovieDetailsController extends IMovieDetailsController {
   final StreamController<GenresState> _genresController =
       StreamController<GenresState>.broadcast();
   final GetGenresUseCase getGenresUseCase;
 
-  MovieGenresController({required this.getGenresUseCase});
+  MovieDetailsController({required this.getGenresUseCase});
 
   @override
   void dispose() {

@@ -20,12 +20,12 @@ class GetMoviesUseCase extends IGetMoviesUseCase {
     final DataState<MovieModel> remoteData =
         await repository.fetchMoviesFromAPI(category);
     if (remoteData.state == BaseState.success) {
-      await Future.forEach(remoteData.data!.result, (Movie movie) async {
-        dataBaseRepository.saveMovie(
+      for (Movie movie in remoteData.data!.result) {
+        await dataBaseRepository.saveMovie(
           movie,
           category,
         );
-      });
+      }
       return DataSuccess<List<Movie>>(
         await dataBaseRepository.getSavedMovies(category),
       );
