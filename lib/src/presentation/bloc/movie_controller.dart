@@ -59,13 +59,13 @@ class MovieController extends IMovieController {
   ) async {
     final List<Movie> searchResult = [];
     movies ??= await getMoviesUseCase.getMovieList(category);
-    final totalMovies = movies!.data!;
+    final List<Movie> totalMovies = movies!.data!;
     _moviesController.sink.add(MovieState.loading());
     if (searchQuery.isEmpty) {
       _moviesController.sink.add(MovieState.success(movieList: totalMovies));
       return;
     }
-    for (final movie in totalMovies) {
+    for (final Movie movie in totalMovies) {
       if (movie.title.toLowerCase().contains(searchQuery.toLowerCase())) {
         searchResult.add(movie);
       }

@@ -23,6 +23,8 @@ class HomeScreenAppBar extends StatefulWidget implements PreferredSizeWidget {
 
 class _HomeScreenAppBarState extends State<HomeScreenAppBar>
     with TickerProviderStateMixin {
+  static const double _sizedBoxWidth = 250;
+  static const double _sizedBoxHeight = 100;
   @override
   void initState() {
     super.initState();
@@ -40,10 +42,10 @@ class _HomeScreenAppBarState extends State<HomeScreenAppBar>
         ),
       ),
       flexibleSpace: Row(
-        children: [
+        children: <Widget>[
           const SizedBox(
-            width: 250,
-            height: 100,
+            width: _sizedBoxWidth,
+            height: _sizedBoxHeight,
             child: TextField(
               obscureText: true,
               decoration: InputDecoration(

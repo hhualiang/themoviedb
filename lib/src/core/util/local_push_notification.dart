@@ -8,9 +8,10 @@ void onDidReceiveBackgroundNotificationResponse(
 ) {}
 
 class LocalPushNotificationPlugin {
-  static const String _logoName = 'flutter_logo';
+  static const String _logoName = 'notification_logo';
   static const String _channelID = 'channelId';
   static const String _channelName = 'channelName';
+  static const int _notificationId = 0;
   final FlutterLocalNotificationsPlugin notificationsPlugin =
       FlutterLocalNotificationsPlugin();
 
@@ -34,7 +35,7 @@ class LocalPushNotificationPlugin {
   }
 
   Future<dynamic> showNotification({
-    int id = 0,
+    int id = _notificationId,
     String? title,
     String? body,
     String? payLoad,

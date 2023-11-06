@@ -78,7 +78,7 @@ class _FavouriteButtonState extends State<FavouriteButton> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      final FavouriteMovieController favouriteMovieController =
+      favouriteMovieController =
           Provider.of<FavouriteMovieController>(
         context,
         listen: false,

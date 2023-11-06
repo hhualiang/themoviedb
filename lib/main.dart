@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:provider/provider.dart';
 
 import 'src/app.dart';
@@ -10,7 +11,10 @@ import 'src/presentation/bloc/movie_genres_controller.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+  FlutterLocalNotificationsPlugin();
+  flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<
+      AndroidFlutterLocalNotificationsPlugin>()?.requestNotificationsPermission();
   final DependencyInitializer dependencyInitializer = DependencyInitializer();
   await dependencyInitializer.initialize();
   runApp(
